@@ -1,0 +1,51 @@
+version: '1.0'
+services:
+  - name: db
+    type: postgres
+    version: 9.6
+    configuration: StandAlone
+    ports:
+      - 5432
+    env:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: null
+    remoteAccess: false
+    deployTo:
+      - odoo
+
+  - name: odoo
+    type: docker
+    image: odoo
+    version: latest
+    ports:
+      - 8069
+      - 8071
+    remoteAccess: false
+    env:
+      HOST: "{{=service('db').getMasterAlias()}}"
+      PORT: "{{=service('db').getMainPort()}}"
+      USER: odoo
+      PASSWORD: "{{=service('db').getEnv('POSTGRES_PASSWORD')}}"
+    volumes:
+      - directory: /var/lib/odoo
+    volumesUID: 104
+    deployTo:
+      - odoo
+
+  - name: web
+    type: nginx
+    version: 1.13
+    ports:
+      - 80
+      - 443
+    remoteAccess: true
+    serviceFiles:
+      - name: odoo
+    deployTo:
+      - odoo
+
+hosts:
+  - name: odoo
+    requirements:
+      cores: 1
+      memory: 1
