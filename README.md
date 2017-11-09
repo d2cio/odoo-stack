@@ -8,10 +8,10 @@
 3. Fill in necessary fields (if they are, e.g. link to your repository)
 4. Click **Create hosts and services**
 
-[![How to deploy a stack](https://github.com/mastappl/images/blob/master/odoo-stack.gif)][1]
+## Demo
+
+![How to deploy a stack](https://github.com/mastappl/images/blob/master/odoo.gif)
 
 ## Minimal recommended configuration:
 
 - 1 host with 1GB RAM
-
-[1]: https://youtu.be/xdn5pxt1Mi4

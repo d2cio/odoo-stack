@@ -16,7 +16,7 @@ services:
   - name: odoo
     type: docker
     image: odoo
-    version: 10.0
+    version: 11.0
     ports:
       - 8069
       - 8071
@@ -28,7 +28,7 @@ services:
       PASSWORD: "{{=service('db').getEnv('POSTGRES_PASSWORD')}}"
     volumes:
       - directory: /var/lib/odoo
-    volumesUID: 104
+    volumesUID: 101
     deployTo:
       - odoo
 
