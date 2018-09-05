@@ -2,7 +2,7 @@ version: '1.0'
 services:
   - name: db
     type: postgres
-    version: 9.6
+    version: 10.4
     configuration: StandAlone
     ports:
       - 5432
@@ -34,7 +34,7 @@ services:
 
   - name: web
     type: nginx
-    version: 1.13
+    version: 1.14
     ports:
       - 80
       - 443
