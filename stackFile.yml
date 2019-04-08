@@ -2,7 +2,7 @@ version: '1.0'
 services:
   - name: db
     type: postgres
-    version: 10.4
+    version: 11.1
     configuration: StandAlone
     ports:
       - 5432
@@ -16,7 +16,7 @@ services:
   - name: odoo
     type: docker
     image: odoo
-    version: 11.0
+    version: 12
     ports:
       - 8069
       - 8071
@@ -34,7 +34,7 @@ services:
 
   - name: web
     type: nginx
-    version: 1.14
+    version: 1.15
     ports:
       - 80
       - 443
