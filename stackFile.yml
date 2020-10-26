@@ -2,14 +2,13 @@ version: '1.0'
 services:
   - name: db
     type: postgres
-    version: 11.7
+    version: 13
     configuration: StandAlone
     ports:
       - 5432
-    env:
-      PGDATABASE: postgres
-      POSTGRES_USER: odoo
-      POSTGRES_PASSWORD: null
+    database: postgres
+    username: odoo
+    userPassword: null
     remoteAccess: false
     deployTo:
       - odoo
@@ -17,7 +16,7 @@ services:
   - name: odoo
     type: docker
     image: odoo
-    version: 13
+    version: 14
     ports:
       - 8069
       - 8071
@@ -26,7 +25,7 @@ services:
       HOST: "{{=service('db').getMasterAlias()}}"
       PORT: "{{=service('db').getMainPort()}}"
       USER: odoo
-      PASSWORD: "{{=service('db').getEnv('POSTGRES_PASSWORD')}}"
+      PASSWORD: "{{=service('db').get('userPassword')}}"
     volumes:
       - directory: /var/lib/odoo
     volumesUID: 101
@@ -35,7 +34,7 @@ services:
 
   - name: web
     type: nginx
-    version: 1.17
+    version: 1.19
     ports:
       - 80
       - 443
